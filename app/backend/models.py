@@ -1,11 +1,10 @@
 # backend/app/models.py
-
 from sqlalchemy import Column, String, DateTime, ForeignKey
-from sqlalchemy.dialects.sqlite import UUID as SQLUUID
 from sqlalchemy.orm import relationship
 import uuid
 from datetime import datetime
 from .database import Base
+
 
 class Student(Base):
     __tablename__ = "students"
