@@ -6,27 +6,25 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-# Calculate the absolute path to the project root (FastApi/app)
+# Proje kök dizinini sys.path'e ekleyin
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-
-# Add the project root to sys.path if it's not already there
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# Import your SQLAlchemy Base
-from app.models import Base  # Ensure this works after modifying sys.path
+# SQLAlchemy Base'i içe aktarın
+from backend.models import Base
 
-# Alembic Config object
+# Alembic Config nesnesi
 config = context.config
 
-# Interpret the config file for Python logging.
+# Python logging yapılandırmasını yorumlayın
 fileConfig(config.config_file_name)
 
-# Set target metadata for 'autogenerate' support
+# 'autogenerate' desteği için hedef metadata'yı ayarlayın
 target_metadata = Base.metadata
 
 def run_migrations_offline():
-    """Run migrations in 'offline' mode."""
+    """Migrations in 'offline' mode."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -39,7 +37,7 @@ def run_migrations_offline():
         context.run_migrations()
 
 def run_migrations_online():
-    """Run migrations in 'online' mode."""
+    """Migrations in 'online' mode."""
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
